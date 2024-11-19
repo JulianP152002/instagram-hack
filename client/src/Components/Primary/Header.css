@@ -1,0 +1,32 @@
+#disable {
+  background-color: #4cb5f9;
+}
+#notdisable {
+  background-color: #0095f6;
+}
+
+.back1 {
+  animation-name: hola;
+  animation-duration: 5s;
+}
+@keyframes hola {
+  from {
+    z-index: 0;
+  }
+  to {
+    z-index: 10;
+  }
+}
+
+.back2 {
+  animation-name: holi;
+  animation-duration: 10s;
+}
+@keyframes holi {
+  from {
+    z-index: 0;
+  }
+  to {
+    z-index: 10;
+  }
+}
