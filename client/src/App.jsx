@@ -10,7 +10,11 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter 
+        future={{
+        v7_startTransition: true,
+        }}
+      >
         <Routes>
           <Route path="/" element={<StartSesion></StartSesion>}></Route>
           <Route path="/about" element={<div>aboutW</div>}></Route>
